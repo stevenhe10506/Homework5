@@ -205,28 +205,20 @@ setMethod("show", "sparse_numeric",
           })
 setMethod("plot",signature(x = "sparse_numeric", y = "sparse_numeric"),
           function(x, y, ...) {
-            # 1. Check lengths
             if (x@length != y@length) {
               stop("Vectors must have the same overall length to compare")
             }
-            
-            # 2. Find overlapping nonzero positions
             overlap <- intersect(x@pos, y@pos)
             if (length(overlap) == 0L) {
               message("No overlapping nonzero positions to plot.")
               return(invisible(NULL))
             }
-            
-            # 3. Extract corresponding values from each vector
             x_vals <- sapply(overlap, function(p) x@value[which(x@pos == p)])
             y_vals <- sapply(overlap, function(p) y@value[which(y@pos == p)])
-            
-            # 4. Combine into matrix for barplot
             data_mat <- rbind(x_vals, y_vals)
             colnames(data_mat) <- paste0("Pos", overlap)
             rownames(data_mat) <- c("x", "y")
-            
-            # 5. Create side-by-side bar plot
+
             barplot(
               data_mat,
               beside = TRUE,
@@ -238,7 +230,7 @@ setMethod("plot",signature(x = "sparse_numeric", y = "sparse_numeric"),
               args.legend = list(x = "topright", bty = "n", inset = 0.02)
             )
           })
-setMethod(
+setMethod(s
   "mean",
   signature(x = "sparse_numeric"),
   function(x, ...) {
@@ -248,4 +240,4 @@ setMethod(
   }
 )
 
-mean(x)
+
