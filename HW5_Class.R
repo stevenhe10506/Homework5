@@ -230,7 +230,7 @@ setMethod("plot",signature(x = "sparse_numeric", y = "sparse_numeric"),
               args.legend = list(x = "topright", bty = "n", inset = 0.02)
             )
           })
-setMethod(s
+setMethod(
   "mean",
   signature(x = "sparse_numeric"),
   function(x, ...) {
